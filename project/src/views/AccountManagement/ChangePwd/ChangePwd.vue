@@ -1,6 +1,6 @@
 <template>
-    <div class="index">
-        index
+    <div class="change-pwd">
+        ChangePwd
     </div>
 </template>
 
