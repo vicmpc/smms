@@ -1,15 +1,13 @@
 <template>
     <div class="add-product">
-        <el-tabs type="border-card">
-            
-            <el-tab-pane label="添加商品">
+        <el-card class="box-card">
+            <div slot="header" class="clearfix">
+                <span>卡片名称</span>
+            </div>
+            <el-tabs type="border-card">
                 <p>所属分类：</p>
                 <el-select v-model="value" placeholder="-----选择分类-----">
-                    <el-option
-                    v-for="item in options"
-                    :key="item.value"
-                    :label="item.label"
-                    :value="item.value">
+                    <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
                     </el-option>
                 </el-select>
                 <p>商品条形码：</p>
@@ -39,48 +37,75 @@
                 <el-radio v-model="radio2" label="1">启用</el-radio>
                 <el-radio v-model="radio2" label="2">禁用</el-radio>
                 <p>商品简介：</p>
-                <textarea style="width:800px; height:50px;" name="商品简介" ></textarea><br>
+                <textarea style="width:800px; height:50px;" name="商品简介"></textarea><br>
                 <span>不超过200个汉字</span>
                 <p>
                     <el-button type="success">添加</el-button>
                 </p>
-                
-            </el-tab-pane>
-        </el-tabs>
+            </el-tabs>
+        </el-card>
+
     </div>
 </template>
 
 <script>
 export default {
-    data() {
-        return {
-            input1: '',
-            input2: '',
-            input3: '',
-            input4: '',
-            input5: '',
-            input6: '',
-            input7: '',
-            input8: '',
-             radio1: '1',
-             radio2: '1',
-            options: [{
-          value: '选项1',
-          label: '黄金糕'
-        }, {
-          value: '选项2',
-          label: '双皮奶'
-        }],
-        value: ''
+  data() {
+    return {
+      input: "",
+      input1: "",
+      input2: "",
+      input3: "",
+      input4: "",
+      input5: "",
+      input6: "",
+      input7: "",
+      input8: "",
+      radio1: "1",
+      radio2: "1",
+      options: [
+        {
+          value: "选项1",
+          label: "黄金糕"
+        },
+        {
+          value: "选项2",
+          label: "双皮奶"
         }
+      ],
+      value: ""
+    };
   }
-}
+};
 </script>
 <style lang="less">
-    .el-tabs__nav{
-        float:right;
+.add-product {
+  flex: 1;
+  // 主体
+
+  .el-card {
+    .el-card__header {
+      font-weight: 700;
+      font-size: 15px;
+      background-color: #f1f1f1;
     }
-    .el-button{
-        margin-left: 20px;
+    .el-card__body {
+      .el-input {
+        display: inline;
+        .el-input__inner {
+          width: 300px;
+        }
+      }
     }
+  }
+}
+.el-tabs__nav {
+  float: right;
+}
+.el-button {
+  margin-left: 20px;
+}
+.el-input {
+  width: 300px !important;
+}
 </style>
