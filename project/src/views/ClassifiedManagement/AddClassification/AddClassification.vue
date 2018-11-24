@@ -69,7 +69,8 @@ export default {
 };
 </script>
 <style lang="less">
-.system-information {
+.add-classification {
+    flex: 1;
   // 主体
   .el-main {
     .el-card {

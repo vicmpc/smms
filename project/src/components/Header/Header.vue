@@ -33,7 +33,6 @@
     .header {
         .el-header {
             position: relative;
-            height: 60px;
             line-height: 60px;
             background-color: #ffffff;
             text-align: right;

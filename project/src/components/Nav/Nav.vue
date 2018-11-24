@@ -1,6 +1,6 @@
 <template>
     <div class="nav">
-        <el-menu :default-active="$route.path" :unique-opened="true" active-text-color="rgb(64, 158, 255)" router>
+        <el-menu :default-active="$route.name" :unique-opened="true" active-text-color="#90d7ec" router>
             <el-submenu index="1">
                 <template slot="title"><i class="el-icon-tickets"></i>分类管理</template>
                     <el-menu-item index="add-classification">添加分类</el-menu-item>
@@ -54,6 +54,22 @@
     .nav {
         .el-menu {
             border: none;
+            background: #585eaa;
+            .el-submenu__title {
+                color: #fff;
+            }
+            .el-submenu__title:hover {
+                background: #494e8f;
+            }
+            .el-menu-item {
+                color: #fff;
+            }
+            .el-menu-item:hover {
+                background: #494e8f;
+            }
+            .el-menu-item:focus {
+                background: #181d4b;
+            }
         }
     }
 

@@ -87,7 +87,8 @@
     };
 </script>
 <style lang="less">
-    .system-information {
+    .sort-management {
+        flex: 1;
         // 主体
         .el-main {
             .el-card {

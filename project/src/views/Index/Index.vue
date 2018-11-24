@@ -1,5 +1,5 @@
 <template>
-    <div class="system-information">
+    <div class="index">
         <!-- 容器 -->
         <el-container>
             <!-- 左 -->
@@ -39,23 +39,21 @@
 
 <style lang="less">
 
-    .system-information {
+    .index {
         height: 100%;
         .el-container {
             height: 100%;
             .el-aside {
-                color: #333;
-                margin-top: 60px;
-                height: 100%;
+                padding-top: 60px;
+                background: #585eaa;
             }
             .el-container {
+                overflow: auto;
                 width: 100%;
                 display: flex; // 让这个盒子 变为一个可以伸缩的盒子
                 flex-direction: column; // 方向是 纵向
             }
-            .el-main {
-                flex: 1;
-            }
+
         }
     }
 

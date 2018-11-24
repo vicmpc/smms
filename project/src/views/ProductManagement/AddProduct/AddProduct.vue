@@ -77,10 +77,14 @@ export default {
 }
 </script>
 <style lang="less">
-    .el-tabs__nav{
-        float:right;
+    .add-product {
+        flex: 1;
+        .el-tabs__nav{
+            float:right;
+        }
+        .el-button{
+            margin-left: 20px;
+        }
     }
-    .el-button{
-        margin-left: 20px;
-    }
+
 </style>
