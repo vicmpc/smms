@@ -78,6 +78,7 @@ export default {
 </script>
 <style lang="less">
 .add-classification {
+    flex: 1;
   // 主体
   .el-main {
     .el-card {

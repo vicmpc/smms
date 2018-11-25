@@ -13,7 +13,6 @@
 <style lang="less">
     .footer {
         .el-footer {
-            height: 60px;
             line-height: 60px;
             background-color: #ffffff;
             border-top: 1px solid rgba(0, 0, 0, 0.1);

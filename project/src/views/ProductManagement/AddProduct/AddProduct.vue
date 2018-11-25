@@ -99,13 +99,23 @@ export default {
     }
   }
 }
-.el-tabs__nav {
-  float: right;
-}
-.el-button {
-  margin-left: 20px;
-}
-.el-input {
-  width: 300px !important;
-}
+// .el-tabs__nav {
+//   float: right;
+// }
+// .el-button {
+//   margin-left: 20px;
+// }
+// .el-input {
+//   width: 300px !important;
+// }
+//     .add-product {
+//         flex: 1;
+//         .el-tabs__nav{
+//             float:right;
+//         }
+//         .el-button{
+//             margin-left: 20px;
+//         }
+//     }
+
 </style>

@@ -35,6 +35,7 @@ import Index from '@/views/Index/Index.vue';
     //进货统计
     import IncomingStatistics from '@/views/StatisticalManagement/IncomingStatistics/IncomingStatistics.vue'
 //账号管理
+import AccountManagement from '@/views/AccountManagement/AccountManagement.vue'
     //账号管理
     import MyAccount from '@/views/AccountManagement/MyAccount/MyAccount.vue'
     //添加账号
@@ -134,6 +135,12 @@ export default new Router({
             },
             //账号管理
             {
+              name: 'account-management',
+              path: '/account-management',
+              component: AccountManagement,
+            },
+            //账号管理
+            {
                 name: 'my-account',
                 path: '/my-account',
                 component: MyAccount,
@@ -164,7 +171,7 @@ export default new Router({
             },
             //系统信息
             {
-                name: 'system-information',
+                name: '',
                 path: '',
                 component: SystemInformation,
             }

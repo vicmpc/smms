@@ -98,19 +98,26 @@ export default {
 };
 </script>
 <style lang="less">
-.sort-management{
-    flex:1;
-  // 主体
-  .el-main {
-    .el-card {
-      .el-card__header {
-        font-weight: 700;
-        font-size: 15px;
-        background-color: #f1f1f1;
-      }
+    .sort-management {
+        flex: 1;
+        // 主体
+        .el-main {
+            .el-card {
+                .el-card__header {
+                    font-weight: 700;
+                    font-size: 15px;
+                    background-color: #f1f1f1;
+                }
+                .el-card__body {
+                    .item {
+                        .el-alert {
+                            margin-bottom: 20px;
+                        }
+                    }
+                }
+            }
+        }
     }
-  }
-}
 </style>
 
 

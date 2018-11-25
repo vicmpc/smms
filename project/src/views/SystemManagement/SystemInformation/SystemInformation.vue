@@ -127,6 +127,7 @@
 </script>
 <style lang="less">
     .system-information {
+        flex: 1;
         // 主体
         .el-main {
             .el-card {

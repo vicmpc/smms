@@ -2,6 +2,10 @@
 import Vue from 'vue';
 //引入Element
 import ElementUI from 'element-ui';
+//引入ECharts
+import ECharts from 'echarts';
+//引入axios
+// import axios from 'axios';
 //引入ElementUI样式文件
 import 'element-ui/lib/theme-chalk/index.css';
 // 引入axios
@@ -18,10 +22,14 @@ import App from './App.vue';
 import router from './router';
 //注册ElementUI
 Vue.use(ElementUI);
+//注册ECharts
+Vue.use(ECharts);
+//将axios挂载在Vue原型上
+// Vue.prototype.axios = axios;
 //阻止生产提示
-Vue.config.productionTip = false
+Vue.config.productionTip = false;
 //创建Vue实例
 new Vue({
   router,
   render: h => h(App)
-}).$mount('#app')
+}).$mount('#app');

@@ -74,10 +74,12 @@ export default {
       font-size: 15px;
       background-color: #f1f1f1;
     }
-    // .el-card__body {
-    //   .el-input {
-    //   }
-    // }
+    .el-card__body {
+      .el-input {
+        width: 300px;
+        
+      }
+    }
   }
 }
 </style>
