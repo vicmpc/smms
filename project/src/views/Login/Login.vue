@@ -88,7 +88,7 @@ export default {
   background: #999;
   height: 100%;
   .loginform {
-    width: 500px;
+    width: 450px;
     height: 400px;
     background: rgba(0, 0, 0, 0.1);
     position: fixed;
@@ -111,9 +111,9 @@ export default {
             .el-form-item__label{
                 color: black;
             }
-            .el-input__inner{
-              width: 400px;
-            }
+            // .el-input__inner{
+              // width: 400px;
+            // }
         }
     }
   }
