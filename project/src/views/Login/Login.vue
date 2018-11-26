@@ -1,77 +1,91 @@
 <template>
     <div class="login">
         <!-- 登录 -->
-        <div class="loginform">
             <!-- 标题 -->
             <h1><i class="el-icon-news"></i>华联超市后台管理系统</h1>
             <!-- 登录表单  -->
-            <el-form :model="loginFrom" status-icon :rules="loginRules" ref="loginFrom" label-width="100px" class="demo-ruleForm">
+            <el-form :model="loginForm" status-icon :rules="loginRules" ref="loginFrom" label-width="100px" class="demo-ruleForm">
                 <el-form-item label="用户名" prop="username">
-                    <el-input type="text" v-model="loginFrom.username" autocomplete="off"></el-input>
+                    <el-input type="text" v-model="loginForm.username" autocomplete="off"></el-input>
                 </el-form-item>
                 <el-form-item label="密码" prop="password">
-                    <el-input type="password" v-model="loginFrom.password" autocomplete="off"></el-input>
+                    <el-input type="password" v-model="loginForm.password" autocomplete="off"></el-input>
                 </el-form-item>
                 <el-form-item label="确认密码" prop="checkpwd">
-                    <el-input type="password" v-model="loginFrom.checkpwd " autocomplete="off" ></el-input>
+                    <el-input type="password" v-model="loginForm.checkpwd " autocomplete="off" ></el-input>
                 </el-form-item>
                 <el-form-item>
-                    <el-button type="primary" @click="submitForm('loginFrom')" :plain="true">登录</el-button>
-                    <el-button @click="resetForm('loginFrom')">重置</el-button>
+                    <el-button type="primary" @click="submitForm('loginForm')" :plain="true">登录</el-button>
+                    <el-button @click="resetForm('loginForm')">重置</el-button>
                 </el-form-item>
             </el-form>
         </div>
-    </div>
 </template>
 
 <script>
-export default {
-   data() {
-      var pwdConsistency = (rule, value, callback) => {
-        if (value === '') {
-          callback(new Error('请再次输入密码'));
-        } else if (value !== this.loginFrom.password) {
-          callback(new Error('两次输入密码不一致!'));
+  import qs from 'qs';
+
+  export default {
+    data() {
+      const confirmPwd = (rule, value, callback) => {
+        if (value === "") {
+          callback(new Error("请再次输入密码"));
+        } else if (value !== this.loginForm.password) {
+          callback(new Error("两次密码不一致"));
         } else {
           callback();
         }
       };
       return {
-        loginFrom: {
-          username: '',
-          password: '',
-          checkpwd: ''
+        loginForm: {
+          username: "",
+          password: "",
+          checkPwd: ""
         },
         loginRules: {
           username: [
-            { required: true, message: '请输入用户名', trigger: 'blur' },
-            { min: 3, max: 8, message: '长度在 3 到 8 个字符', trigger: 'blur' }
+            { required: true, message: "账号不能为空", trigger: "blur" }, // 非空验证
+            { min: 3, max: 6, message: "长度必须 3 到 6 个字符", trigger: "blur" } // 长度验证
           ],
           password: [
-            { required: true, message: '请输入密码', trigger: 'blur' },
-            { min: 3, max: 8, message: '长度在 3 到 8 个字符', trigger: 'blur' }
+            { required: true, message: "密码不能为空", trigger: "blur" }, // 非空验证
+            { min: 3, max: 6, message: "长度必须 3 到 6 个字符", trigger: "blur" } // 长度验证
           ],
-          checkpwd: [
-            { required: true, validator: pwdConsistency, trigger: 'blur' }
+          checkPwd: [
+            { required: true, validator: confirmPwd, trigger: "blur" } // 非空验证
           ]
         }
       };
     },
     methods: {
       submitForm(formName) {
-        this.$refs[formName].validate((valid) => {
+        this.$refs[formName].validate(valid => {
           if (valid) {
-            this.$message({
-              message: '登陆成功',
-              type: 'success'
-            });
-            // 获取用户输入的账号和密码
-            let username = this.loginFrom.username;
-            let password = this.loginFrom.password;
-            // 通过路由到后端系统首页
-            this.$router.push('/')
+            let params = {
+              username: this.loginForm.username,
+              password: this.loginForm.password
+            };
+            this.axios.defaults.withCredentials=true;
+            this.axios.post('http://127.0.0.1:474/users/checklogin',
+              qs.stringify(params),
+              { headers: {'Content-Type':'application/x-www-form-urlencoded'} }
+            )
+              .then(response => {
+                if (response.data.rstCode === 1) {
+                  this.$message({
+                    type: 'success',
+                    message: response.data.msg
+                  });
+                  setTimeout(() => {
+                    this.$router.push("/");
+                  }, 500)
+                } else {
+                  this.$message.error(response.data.msg)
+                }
+              })
+
           } else {
-            alert('登录失败!');
+            console.log("验证失败");
             return false;
           }
         });
@@ -80,14 +94,11 @@ export default {
         this.$refs[formName].resetFields();
       }
     }
-}
+  };
 </script>
 
 <style lang="less">
-.login {
-  background: #999;
-  height: 100%;
-  .loginform {
+  .login {
     width: 500px;
     height: 400px;
     background: rgba(0, 0, 0, 0.1);
@@ -117,5 +128,4 @@ export default {
         }
     }
   }
-}
 </style>
