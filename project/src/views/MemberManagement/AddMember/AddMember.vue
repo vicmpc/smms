@@ -189,7 +189,19 @@ export default {
         font-size: 15px;
         background-color: #f1f1f1;
       }
-     
+     .el-card__body{
+       .item{
+         .el-form{
+           .el-form-item{
+             .el-form-item__content{
+               .el-input{
+                 width: 300px;
+               }
+             }
+           }
+         }
+       }
+     }
       
     }
   }
