@@ -9,7 +9,7 @@
                 </div>
                 <!-- 面板内容 -->
                 <div class="text item">
-                    <el-form :model="loginFrom" status-icon :rules="loginRules" ref="loginFrom" label-width="100px" class="demo-ruleForm">
+                    <el-form :model="sortFrom" status-icon :rules="loginRules" ref="sortFrom" label-width="100px" class="demo-ruleForm">
                         <el-form-item label="所属分类：" prop="sort">
                             <el-select v-model="region" placeholder="-----顶级分类-----">
                                 <el-option label="水果" value="shanghai"></el-option>
@@ -17,14 +17,14 @@
                             </el-select>
                         </el-form-item>
                         <el-form-item label="分类名称" prop="sortname">
-                            <el-input type="text" v-model="loginFrom.username" autocomplete="off" placeholder="请输入内容"></el-input>
+                            <el-input type="text" v-model="sortFrom.username" autocomplete="off" placeholder="请输入内容"></el-input>
                         </el-form-item>
                         <el-form-item label="状态：" prop="state">
                             <el-radio v-model="radio" label="1">启用</el-radio>
                             <el-radio v-model="radio" label="2">禁用</el-radio>
                         </el-form-item>
                         <el-form-item>
-                            <el-button type="primary" @click="submitForm('loginFrom')">添加</el-button>
+                            <el-button type="primary" @click="submitForm('sortFrom')">添加</el-button>
                         </el-form-item>
                     </el-form>
                    
@@ -45,7 +45,7 @@ export default {
           label: "零食"
         }
       ],
-      loginFrom: {
+      sortFrom: {
           sort: '',
           sortname:'',
           state:''
@@ -58,12 +58,20 @@ export default {
       value: "",
       region:'',
       radio: '1',
-      input: ''
+      input: '',
+      username:''
     };
   },
   methods:{
     submitForm(){
-      
+      this.$refs[formName].validate((valid) => {
+          if (valid) {
+            alert('submit!');
+          } else {
+            console.log('error submit!!');
+            return false;
+          }
+        });
     }
   }
 };
@@ -81,8 +89,8 @@ export default {
       }
       .el-card__body {
         .item {
-          .el-alert {
-            margin-bottom: 20px;
+          .el-input__inner{
+            width: 300px;
           }
         }
       }

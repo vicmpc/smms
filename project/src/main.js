@@ -5,9 +5,15 @@ import ElementUI from 'element-ui';
 //引入ECharts
 import ECharts from 'echarts';
 //引入axios
-import axios from 'axios';
+// import axios from 'axios';
 //引入ElementUI样式文件
 import 'element-ui/lib/theme-chalk/index.css';
+// 引入axios
+import axios from 'axios';
+// 把axios挂载在vue的原型上
+Vue.prototype.axios = axios;
+
+
 //引入基本（base）样式
 import '@/common/css/base.css';
 //引入顶级组件App
@@ -19,7 +25,7 @@ Vue.use(ElementUI);
 //注册ECharts
 Vue.use(ECharts);
 //将axios挂载在Vue原型上
-Vue.prototype.axios = axios;
+// Vue.prototype.axios = axios;
 //阻止生产提示
 Vue.config.productionTip = false;
 //创建Vue实例
