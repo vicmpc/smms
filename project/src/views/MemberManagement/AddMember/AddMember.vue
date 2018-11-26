@@ -12,10 +12,7 @@
         <div class="text item">
           <!-- 添加账号表单 -->
           <el-form :model="addAccountForm" status-icon :rules="addAccountRules" ref="addAccountForm" label-width="100px" class="demo-ruleForm">
-            <!-- 会员卡卡号 -->
-            <!-- <el-form-item label="会员卡卡号" prop="cardid"> -->
-              <!-- <el-input type="text" v-model="addAccountForm.cardid" autocomplete="off"></el-input> -->
-            <!-- </el-form-item> -->
+           
             <!-- 真实名字 -->
             <el-form-item label="真实姓名" prop="username">
               <el-input type="text" v-model="addAccountForm.username" autocomplete="off"></el-input>
@@ -33,10 +30,6 @@
             <el-form-item label="折扣" prop="discount">
               <el-input type="text" v-model="addAccountForm.discount"></el-input>
             </el-form-item>
-            <!-- 身份证号 -->
-            <!-- <el-form-item label="身份证号" prop=" identitycard">
-                            <el-input type="text" v-model="addAccountForm.identitycard"></el-input>
-                        </el-form-item> -->
             <el-form-item label="用户状态" prop="userstate">
               <el-radio-group v-model="addAccountForm.userstate">
                 <el-radio label="启用"></el-radio>
@@ -49,9 +42,6 @@
             <el-form-item label="座机号码" prop="landlinenumber">
               <el-input type="text" v-model="addAccountForm.landlinenumber"></el-input>
             </el-form-item>
-            <!-- <el-form-item label="邮箱地址" prop="emailaddress">
-                            <el-input type="text" v-model="addAccountForm.emailaddress"></el-input>
-                        </el-form-item> -->
 
             <!-- 添加按钮 -->
             <el-form-item>
@@ -133,7 +123,6 @@ export default {
         if (valid) {
           // 获取用户输入的新增数据，用一个参数对象保存
           var params = {
-            // cardid: this.addAccountForm.cardid,
             username: this.addAccountForm.username,
             usergrade: this.addAccountForm.usergrade,
             userintegral: this.addAccountForm.userintegral,
