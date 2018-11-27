@@ -134,7 +134,7 @@ export default {
           // 发送ajax请求  把数据发送给后端
           this.axios
             .post(
-              "http://127.0.0.1:888/users/addmember",
+              "http://127.0.0.1:474/users/addmember",
               qs.stringify(params), // 参数处理
               {
                 headers: { "Content-Type": "application/x-www-form-urlencoded" } // 设置请求头

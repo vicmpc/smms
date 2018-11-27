@@ -41,7 +41,7 @@
                 this.$router.push('/my-account')
             } else if (command === 'logout') {
                 // 发送ajax请求 给后端
-                this.axios.get('http://127.0.0.1:888/users/logout')
+                this.axios.get('http://127.0.0.1:474/users/logout')
                   .then(response => {
                       // 退出成功   
                       if (response.data.rstCode === 1) {
@@ -61,7 +61,7 @@
     },
     created () {
         // 发送请求 获取用户名
-        this.axios.get('http://127.0.0.1:888/users/getusername')
+        this.axios.get('http://127.0.0.1:474/users/getusername')
         .then(response => {
             // 直接把后端响应的用户名赋值给data里面的 username
             this.username = response.data;

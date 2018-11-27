@@ -199,7 +199,7 @@ router.get('/editmember', (req, res) => {
 })
 
 // 批量删除请求路由 /batchdel
-router.post('/batchdel', (req, res) => {
+router.post('/batchdelmember', (req, res) => {
   // 接收前端传过来的需要批量删除的id数组
   let { idArr } = req.body;
   // 把字符串类型数据转为数组
@@ -224,7 +224,7 @@ router.post('/batchdel', (req, res) => {
 })
 
 // 
-router.post('/saveedit', (req, res) => {
+router.post('/saveeditmember', (req, res) => {
   // 接收新的数据和原来的cardid
   let { username, usergrade, userintegral, userstate, discount, tel, landlinenumber, editId } = req.body;
   // 构造sql语句

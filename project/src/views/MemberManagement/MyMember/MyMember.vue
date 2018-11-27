@@ -181,7 +181,7 @@ export default {
 
       // 发送一个ajax 把需要修改的数据的cardid发送给后端
       this.axios
-        .get(`http://127.0.0.1:888/users/editmember?cardid=${cardid}`)
+        .get(`http://127.0.0.1:474/users/editmember?cardid=${cardid}`)
         .then(response => {
           // 一一对应 把数据回填到模态框里面
           this.editForm.username = response.data[0].username;
@@ -200,7 +200,7 @@ export default {
     handleDelete(cardid) {
       // 发送一个请求 把id发送给后端
       this.axios
-        .get(`http://127.0.0.1:888/users/delmember?cardid=${cardid}`)
+        .get(`http://127.0.0.1:474/users/delmember?cardid=${cardid}`)
         .then(response => {
           // 根据后端响应的数据判断
           if (response.data.rstCode === 1) {
@@ -248,7 +248,7 @@ export default {
       // 发送一个ajax请求 把这个id数组（里面是需要批量删除的数据的id）发送给后端
       this.axios
         .post(
-          "http://127.0.0.1:888/users/batchdel",
+          "http://127.0.0.1:474/users/batchdelmember",
           qs.stringify(param), // 处理参数
           { Header: { "Content-Type": "application/x-www-form-urlencoded" } } // 设置请求头
         )
@@ -272,7 +272,7 @@ export default {
     // 封装一个请求所有用户账号数据的函数
     // getmemberList() {
     //   // 发送ajax请求 获取所有数据
-    //   this.axios.get("http://127.0.0.1:888/users/memberlist").then(response => {
+    //   this.axios.get("http://127.0.0.1:474/users/memberlist").then(response => {
     //     // 直接把请求到的所用用户账号的数据 赋值给 tableData 渲染用户账号列表
     //     this.tableData = response.data;
     //   });
@@ -286,7 +286,7 @@ export default {
 
       // 发送ajax请求 按照分页请求数据
       this.axios
-        .get(`http://127.0.0.1:888/users/memberlistbypage?currentPage=${currentPage}&pageSize=${pageSize}`)
+        .get(`http://127.0.0.1:474/users/memberlistbypage?currentPage=${currentPage}&pageSize=${pageSize}`)
         .then(response => {
 
           // 把后端返回的对应页码的数据 赋值给 tableData
@@ -323,7 +323,7 @@ export default {
 
           // 发送ajax 把修改后的新数据 和 原来的id 一起发送给后端
           this.axios
-            .post("http://127.0.0.1:888/users/saveedit", qs.stringify(params), {
+            .post("http://127.0.0.1:474/users/saveeditmember", qs.stringify(params), {
               Header: { "Content-Type": "application/x-www-form-urlencoded" }
             })
             .then(response => {

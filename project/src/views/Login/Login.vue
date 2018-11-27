@@ -73,7 +73,7 @@ export default {
           this.axios.defaults.withCredentials=true;
           
              // 写ajax 把用户名和密码 一起发送给后端
-          this.axios.post('http://127.0.0.1:888/users/checklogin',
+          this.axios.post('http://127.0.0.1:474/users/checklogin',
             qs.stringify(params),
             { headers: {'Content-Type':'application/x-www-form-urlencoded'} }
           )

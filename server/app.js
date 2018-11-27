@@ -38,8 +38,8 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-app.listen(888,() => {
-  console.log("服务器启动成功，地址是http://127.0.0.1:888")
+app.listen(474,() => {
+  console.log("服务器启动成功，地址是http://127.0.0.1:474")
 })
 
 module.exports = app;

@@ -29,7 +29,7 @@ router.beforeEach((to, from, next) => {
   // 允许携带cookie
   axios.defaults.withCredentials=true;
   // 发送请求 去检查用户是否登录（是否有cookie）
-  axios.get('http://127.0.0.1:888/users/checkIsLogin')
+  axios.get('http://127.0.0.1:474/users/checkIsLogin')
     .then(response => {
       isLogin = response.data.isLogin;
       console.log(isLogin)
