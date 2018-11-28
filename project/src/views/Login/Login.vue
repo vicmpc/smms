@@ -4,7 +4,7 @@
         <!-- 标题 -->
         <h1><i class="el-icon-news"></i>华联超市后台管理系统</h1>
         <!-- 登录表单  -->
-        <el-form :model="loginForm" status-icon :rules="loginRules" ref="loginFrom" label-width="100px"
+        <el-form :model="loginForm" status-icon :rules="loginRules" ref="loginForm" label-width="100px"
                  class="demo-ruleForm">
             <el-form-item label="用户名" prop="username">
                 <el-input type="text" v-model="loginForm.username" autocomplete="off"></el-input>

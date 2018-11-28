@@ -9,8 +9,8 @@
                 </div>
                 <!-- 面板内容 -->
                 <el-table
-                        ref="myAccount"
-                        :data='tableData'
+                        ref="myaccount"
+                        :data="tableData"
                         style="width: 100%"
                         tooltip-effect="dark"
                         @selection-change="handleSelectionChange">
@@ -120,31 +120,31 @@
     },
     methods: {
       //获取当前页面尺寸
-      handleSizeChange(id) {
+      handleSizeChange(val) {
         this.pageSize = val;
         this.getAccountListByPage();
       },
       //页码改变出触发函数
       handleCurrentChange(val) {
         this.currentPage = val;
-        this.getUserListByPage();
+        this.getAccountListByPage();
       },
       //编辑
       handleEdit(id) {
         this.editId = id;
         // 发送需要编辑的id
-        this.axios.get(`http://192.168.20.1:3000/users/edituser?id=${id}`)
+        this.axios.get(`http://127.0.0.1:474/users/edituser?id=${id}`)
           .then(response => {
             this.editForm.username = response.data[0].username;
             this.editForm.password = response.data[0].password;
-            this.editForm.usergroup = response.data[0].usergroup;
+            this.editForm.selectuser = response.data[0].selectuser;
             this.dialogFormVisible = true;
           })
       },
       /* 删除数据 */
       handleDelete(id) {
         // console.log('删除id'+id);
-        this.axios.get(`http://127.0.0.1:474/users/del-account?id=${id}`)
+        this.axios.get(`http://127.0.0.1:474/users/delaccount?id=${id}`)
           .then(response => {
             if (response.data.rstCode === 1) {
               this.$message({
@@ -152,7 +152,7 @@
                 message: response.data.msg
               });
               //重新请求数据
-              this.getAccountList();
+              this.getAccountListByPage();
             } else {
               this.$message.error(response.data.msg);
             }
@@ -160,7 +160,7 @@
       },
       //取消选择
       toggleSelection() {
-        this.$refs.myAccount.clearSelection();
+        this.$refs.myaccount.clearSelection();
       },
       //选择状态改变
       handleSelectionChange(val) {
@@ -192,19 +192,12 @@
           }
         })
       },
-      /* 请求数据函数 */
-      getAccountList() {
-        this.axios.get("http://127.0.0.1:474/users/my-account")
-          .then(response => {
-            this.tableData = response.data;
-          });
-      },
       /* 请求分页数据函数 */
       getAccountListByPage() {
         let currentPage = this.currentPage;
         let pageSize = this.pageSize;
         this.axios
-          .get(`http://127.0.0.1:474/users/my-account-by-page?currentPage=${currentPage}&pageSize=${pageSize}`)
+          .get(`http://127.0.0.1:474/users/myaccount?currentPage=${currentPage}&pageSize=${pageSize}`)
           .then(response => {
             this.tableData = response.data.data;
             this.totalCount = response.data.totalCount;
@@ -221,11 +214,11 @@
             let params = {
               username: this.editForm.username,
               password: this.editForm.password,
-              usergroup: this.editForm.usergroup,
+              selectuser: this.editForm.selectuser,
               editId: this.editId
             };
             // 发送ajax 把修改后的新数据 和 原来的id 一起发送给后端
-            this.axios.post('http://192.168.20.1:3000/users/saveedit',
+            this.axios.post('http://127.0.0.1:474/users/saveedit',
               qs.stringify(params),
               { Header: { 'Content-Type': 'application/x-www-form-urlencoded' } }
             ).then(response => {

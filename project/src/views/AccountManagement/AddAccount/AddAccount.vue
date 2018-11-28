@@ -88,7 +88,7 @@
             };
             //发送ajax请求，传输数据
             this.axios.post(
-              'http://127.0.0.1:474/users/add-account',
+              'http://127.0.0.1:474/users/addaccount',
               qs.stringify(params),
               {'headers': {'Content-Type': 'application/x-www-form-urlencoded'}}
             )

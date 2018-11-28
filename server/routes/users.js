@@ -13,7 +13,7 @@ router.all('*', (req, res, next) => {
 /* 检测用户名有效性 */
 router.post('/checklogin', (req, res) => {
   let { username, password } = req.body;
-  const sqlStr = `select * from users where username='${username}' and password='${password}'`;
+  const sqlStr = `select * from account where username='${username}' and password='${password}'`;
   connection.query(sqlStr, (err, data) => {
     if (err) {
       throw err;
@@ -55,7 +55,7 @@ router.get('/logout', (req, res) => {
 router.get('/checkoldpwd', (req, res) => {
   let { oldPwd } = req.query;
   let id = req.cookies.userid;
-  const sqlStr = `select * from users where id=${id}`;
+  const sqlStr = `select * from account where id=${id}`;
   connection.query(sqlStr, (err, data) => {
     if (err) {
       throw err;
@@ -77,7 +77,7 @@ router.get('/checkoldpwd', (req, res) => {
 router.get('/savenewpwd', (req, res) => {
   let { newPwd } = req.query;
   let id = req.cookies.userid;
-  const sqlStr = `update users set password='${newPwd}' where id=${id}`;
+  const sqlStr = `update account set password='${newPwd}' where id=${id}`;
   connection.query(sqlStr, (err, data) => {
     if (err) {
       throw err;
@@ -94,10 +94,7 @@ router.get('/savenewpwd', (req, res) => {
 });
 
 /* 添加账号 */
-router.post('/add-account', (req, res) => {
-  // 先设置响应头
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  // res.send ("aaa")
+router.post('/addaccount', (req, res) => {
   //接受参数
   let {username, password, selectuser} = req.body;
   // console.log(username, password, selectuser);
@@ -120,14 +117,12 @@ router.post('/add-account', (req, res) => {
 });
 
 /* 接受用户账号列表请求 */
-router.get('/my-account-by-page', (req, res) => {
-  // 先设置响应头
-  res.setHeader('Access-Control-Allow-Origin', '*');
+router.get('/myaccount', (req, res) => {
   let {currentPage, pageSize} = req.query;
   /* 设置默然参数 */
   currentPage = currentPage ? currentPage : 1;
   pageSize = pageSize ? pageSize : 3;
-  let sqlStr = 'select * from users order by cdate desc';
+  let sqlStr = 'select * from account order by cdate desc';
   // 查询所有数据 计算出数据总条数
   connection.query(sqlStr, (err, data) => {
     if (err) {
@@ -150,9 +145,7 @@ router.get('/my-account-by-page', (req, res) => {
 });
 
 /* 删除请求 */
-router.get('/del-account', (req, res) => {
-  // 先设置响应头
-  res.setHeader('Access-Control-Allow-Origin', '*');
+router.get('/delaccount', (req, res) => {
   let {id} = req.query;
   const sqlStr = `delete from account where id = ${id}`;
   connection.query(sqlStr, (err, data) => {
@@ -171,7 +164,7 @@ router.get('/del-account', (req, res) => {
 /* 数据回显 */
 router.get('/edituser', (req, res) => {
   let {id} = req.query;
-  const sqlStr = `select * from users where id=${id}`;
+  const sqlStr = `select * from account where id=${id}`;
   connection.query(sqlStr, (err, data) => {
     if (err) {
       throw err;
@@ -183,8 +176,8 @@ router.get('/edituser', (req, res) => {
 
 /* 保存更改数据 */
 router.post('/saveedit', (req, res) => {
-  let {username, password, usergroup, editId} = req.body;
-  const sqlStr = `update users set username='${username}', password='${password}', usergroup='${usergroup}' where id=${editId}`;
+  let {username, password, selectuser, editId} = req.body;
+  const sqlStr = `update account set username='${username}', password='${password}', selectuser='${selectuser}' where id=${editId}`;
   connection.query(sqlStr, (err, data) => {
     if (err) {
       throw err;
@@ -202,7 +195,7 @@ router.post('/saveedit', (req, res) => {
 router.post('/batchdel', (req, res) => {
   let {idArr} = req.body;
   idArr = JSON.parse(idArr);
-  const sqlStr = `delete from users where id in (${idArr})`;
+  const sqlStr = `delete from account where id in (${idArr})`;
   connection.query(sqlStr, (err, data) => {
     if (err) {
       throw err;
