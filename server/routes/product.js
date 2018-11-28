@@ -53,9 +53,9 @@ router.post('/addproduct', (req, res) => {
   })
 })
 
-// // /**
-// //  * 商品列表 /productlist
-// //  */
+/**
+ * 商品列表 /productlist
+ */
 router.get('/productlist', (req, res) => {
 
   // 构造sql 查询所有用户账号数据 

@@ -201,7 +201,7 @@ export default {
 
       // 发送一个ajax 把需要修改的数据的id发送给后端
       this.axios
-        .get(`http://127.0.0.1:474/users/edituser?id=${id}`)
+        .get(`http://127.0.0.1:474/product/edituser?id=${id}`)
         .then(response => {
           // 一一对应 把数据回填到模态框里面
           this.editForm.username = response.data[0].username;
@@ -216,7 +216,7 @@ export default {
     handleDelete(id) {
       // 发送一个请求 把id发送给后端
       this.axios
-        .get(`http://127.0.0.1:474/users/deluser?id=${id}`)
+        .get(`http://127.0.0.1:474/product/deluser?id=${id}`)
         .then(response => {
           // 根据后端响应的数据判断
           if (response.data.rstCode === 1) {
@@ -262,7 +262,7 @@ export default {
       // 发送一个ajax请求 把这个id数组（里面是需要批量删除的数据的id）发送给后端
       this.axios
         .post(
-          "http://127.0.0.1:474/users/batchdel",
+          "http://127.0.0.1:474/product/batchdel",
           qs.stringify(param), // 处理参数
           { Header: { "Content-Type": "application/x-www-form-urlencoded" } } // 设置请求头
         )
