@@ -46,6 +46,7 @@ router.beforeEach((to, from, next) => {
     })
 }) 
 
+
 //注册ElementUI
 Vue.use(ElementUI);
 //注册ECharts

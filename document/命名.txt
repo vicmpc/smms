@@ -1,0 +1,25 @@
+分类管理：ClassifiedManagement
+	添加分类：AddClassification
+	分类管理：SortManagement
+商品管理：ProductManagement
+	添加商品：AddProduct
+	商品列表：ProductList
+进货管理：StockManagement
+	添加库存：AddInventory
+	库存列表：InventoryList
+出货管理：ShippingManagement
+	销售列表：SalesList
+	商品出库：ProductDelivery
+	商品退货：ProductReturn
+统计管理：StatisticalManagement
+	销售统计：SalesStatistics
+	进货统计：IncomingStatistics
+账号管理：AccountManagement
+	账号管理：MyAccount
+	添加账号：AddAccount
+	修改密码：ChangePwd
+会员管理：MemberManagement
+	账号管理：MyMember
+	添加账号：AddMember
+系统管理：SystemManagement
+	系统信息：SystemInformation

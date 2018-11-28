@@ -5,19 +5,19 @@
       <!-- 标题 -->
       <h1><i class="el-icon-news"></i>华联超市后台管理系统</h1>
       <!-- 登录表单  -->
-      <el-form :model="loginFrom" status-icon :rules="loginRules" ref="loginFrom" label-width="100px" class="demo-ruleForm">
+      <el-form :model="loginForm" status-icon :rules="loginRules" ref="loginForm" label-width="100px" class="demo-ruleForm">
         <el-form-item label="用户名" prop="username">
-          <el-input type="text" v-model="loginFrom.username" autocomplete="off"></el-input>
+          <el-input type="text" v-model="loginForm.username" autocomplete="off"></el-input>
         </el-form-item>
         <el-form-item label="密码" prop="password">
-          <el-input type="password" v-model="loginFrom.password" autocomplete="off"></el-input>
+          <el-input type="password" v-model="loginForm.password" autocomplete="off"></el-input>
         </el-form-item>
         <el-form-item label="确认密码" prop="checkpwd">
-          <el-input type="password" v-model="loginFrom.checkpwd " autocomplete="off"></el-input>
+          <el-input type="password" v-model="loginForm.checkpwd " autocomplete="off"></el-input>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" @click="submitForm('loginFrom')" :plain="true">登录</el-button>
-          <el-button @click="resetForm('loginFrom')">重置</el-button>
+          <el-button type="primary" @click="submitForm('loginForm')" :plain="true">登录</el-button>
+          <el-button @click="resetForm('loginForm')">重置</el-button>
         </el-form-item>
       </el-form>
     </div>
@@ -29,44 +29,44 @@
 import qs from 'qs';
 export default {
    data() {
-      var pwdConsistency = (rule, value, callback) => {
+      var confirmPwd = (rule, value, callback) => {
         if (value === '') {
           callback(new Error('请再次输入密码'));
-        } else if (value !== this.loginFrom.password) {
+        } else if (value !== this.loginForm.password) {
           callback(new Error('两次输入密码不一致!'));
         } else {
           callback();
         }
       };
       return {
-        loginFrom: {
-          username: '',
-          password: '',
-          checkpwd: ''
+        loginForm: {
+          username: "",
+          password: "",
+          checkPwd: ""
         },
         loginRules: {
           username: [
-            { required: true, message: '请输入用户名', trigger: 'blur' },
-            { min: 3, max: 8, message: '长度在 3 到 8 个字符', trigger: 'blur' }
+            {required: true, message: "账号不能为空", trigger: "blur"}, // 非空验证
+            {min: 3, max: 6, message: "长度必须 3 到 6 个字符", trigger: "blur"} // 长度验证
           ],
           password: [
-            { required: true, message: '请输入密码', trigger: 'blur' },
-            { min: 3, max: 8, message: '长度在 3 到 8 个字符', trigger: 'blur' }
+            {required: true, message: "密码不能为空", trigger: "blur"}, // 非空验证
+            {min: 3, max: 6, message: "长度必须 3 到 6 个字符", trigger: "blur"} // 长度验证
           ],
-          checkpwd: [
-            { required: true, validator: pwdConsistency, trigger: 'blur' }
+          checkPwd: [
+            {required: true, validator: confirmPwd, trigger: "blur"} // 非空验证
           ]
         }
       };
     },
     methods: {
-      submitForm(formName) {
+     submitForm(formName) {
         this.$refs[formName].validate((valid) => {
           if (valid) {
            // 获取用户输入的账号和密码
             let params = {
-              username :this.loginFrom.username,
-              password :this.loginFrom.password
+              username :this.loginForm.username,
+              password :this.loginForm.password
             }
 
              // 允许携带cookie
@@ -103,7 +103,7 @@ export default {
         this.$refs[formName].resetFields();
       }
     }
-}
+  };
 </script>
 
 <style lang="less">
