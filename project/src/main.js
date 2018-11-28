@@ -20,6 +20,33 @@ import '@/common/css/base.css';
 import App from './App.vue';
 //引入路由
 import router from './router';
+
+// 全局路由守卫
+router.beforeEach((to, from, next) => {
+  // 定义一个登录状态
+  let isLogin = false;
+
+  // 允许携带cookie
+  axios.defaults.withCredentials=true;
+  // 发送请求 去检查用户是否登录（是否有cookie）
+  axios.get('http://127.0.0.1:474/users/checkIsLogin')
+    .then(response => {
+      isLogin = response.data.isLogin;
+      console.log(isLogin)
+      // 如果已经登录 直接放行
+      if (!isLogin) {
+        if (to.path !== '/login') {
+          return next({'path': '/login'})
+        } else {
+          next()
+        }
+      } else {
+        next();
+      }
+    })
+}) 
+
+
 //注册ElementUI
 Vue.use(ElementUI);
 //注册ECharts

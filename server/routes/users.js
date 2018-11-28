@@ -22,7 +22,7 @@ router.post('/checklogin', (req, res) => {
         res.cookie('userid', data[0].id);
         res.cookie('username', data[0].username);
 
-        res.send({"rstCode":1, "msg":"欢迎您! 登录成功!"})
+        res.send({"rstCode":1, "msg":"登录成功!"})
       } else {
         res.send({"rstCode":0, "msg":"请检查用户名或密码!"})
       }
@@ -142,7 +142,52 @@ router.get('/myaccount', (req, res) => {
       })
     }
   })
-});
+})
+
+//  接收单条删除的请求 /delmember
+
+router.get('/delmember', (req, res) => {
+  // 接收cardid
+  let { cardid } = req.query
+  // 构造sql 根据接收到的cardid 删除这一条数据
+  const sqlStr = `delete from member where cardid = ${cardid}`
+
+  // 执行sql语句（单条删除操作）
+  connection.query(sqlStr, (err, data) => {
+    if (err) {
+      throw err
+    } else {
+      // 根据结果判断 如果受影响行数 > 0 就是删除成功
+      if (data.affectedRows > 0) {
+        // 返回删除成功的信息给前端
+        res.send({ "rstCode": 1, "msg": "删除成功" })
+      } else {
+        // 否则就是删除失败 返回删除失败的信息给前端
+        res.send({ "rstCode": 0, "msg": "删除失败" })
+      }
+    }
+  })
+
+})
+
+
+// 接收修改用户请求 - 数据回显 /editmember
+
+router.get('/editmember', (req, res) => {
+  // 接收需要修改的数据的id
+  let { cardid } = req.query;
+
+  // 构造sql语句
+  const sqlStr = `select * from member where cardid=${cardid}`;
+  // 执行sql语句
+  connection.query(sqlStr, (err, data) => {
+    if (err) {
+      throw err;
+    } else {
+      res.send(data);
+    }
+  })
+})
 
 /* 删除请求 */
 router.get('/delaccount', (req, res) => {
@@ -173,6 +218,31 @@ router.get('/edituser', (req, res) => {
     }
   })
 });
+
+// 批量删除请求路由 /batchdelmember
+router.post('/batchdelmember', (req, res) => {
+  // 接收前端传过来的需要批量删除的id数组
+  let { idArr } = req.body;
+  // 把字符串类型数据转为数组
+  idArr = JSON.parse(idArr);
+
+  // 构造sql语句 执行批量删除
+  const sqlStr = `delete from member where cardid in (${idArr})`;
+  // 执行sql语句
+  connection.query(sqlStr, (err, data) => {
+    if (err) {
+      throw err;
+    } else {
+      // 如果受影响行数 大于 0 就是删除成功 返回删除成功的信息给前端
+      if (data.affectedRows > 0) {
+        res.send({ "rstCode": 1, "msg": "批量删除成功" })
+      } else {
+        // 否则就是失败 返回失败的信息给前端
+        res.send({ "rstCode": 0, "msg": "批量删除失败" })
+      }
+    }
+  })
+})
 
 /* 保存更改数据 */
 router.post('/saveedit', (req, res) => {
